@@ -11,7 +11,7 @@ const stats = [
 
 export default function About() {
   return (
-    <section id="about" className="py-28 md:py-36">
+    <section id="about" className="py-28 md:py-36 [content-visibility:auto] [contain-intrinsic-size:auto_900px]">
       <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
         <Reveal className="relative">
           <PlaceholderImage

@@ -8,7 +8,7 @@ const teaser = PORTFOLIO.filter((p) => p.id % 2 === 1).slice(0, 6)
 
 export default function GalleryTeaser() {
   return (
-    <section id="gallery" className="py-28 md:py-36">
+    <section id="gallery" className="py-28 md:py-36 [content-visibility:auto] [contain-intrinsic-size:auto_1000px]">
       <div className="max-w-6xl mx-auto px-6">
         <Reveal className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-16">
           <div>

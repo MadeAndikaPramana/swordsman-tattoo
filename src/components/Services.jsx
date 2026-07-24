@@ -38,7 +38,7 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="py-28 md:py-36 bg-gradient-to-b from-transparent via-ink-soft/85 to-transparent backdrop-blur-[2px]"
+      className="py-28 md:py-36 bg-gradient-to-b from-transparent via-ink-soft/85 to-transparent [content-visibility:auto] [contain-intrinsic-size:auto_900px]"
     >
       <div className="max-w-6xl mx-auto px-6">
         <Reveal className="max-w-xl mb-16">

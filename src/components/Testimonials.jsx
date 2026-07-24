@@ -38,7 +38,7 @@ const rotate = (arr, n) => [...arr.slice(n), ...arr.slice(0, n)]
 
 function ReviewCard({ review }) {
   return (
-    <figure className="bg-ink-soft/80 backdrop-blur-sm border border-bone/10 p-6">
+    <figure className="bg-ink-soft border border-bone/10 p-6">
       <div className="flex gap-1 text-blood-bright text-sm mb-3" aria-label="5 stars">
         ★★★★★
       </div>
@@ -72,7 +72,7 @@ function Column({ reviews, duration, className = '' }) {
 
 export default function Testimonials() {
   return (
-    <section id="reviews" className="py-28 md:py-36 overflow-hidden">
+    <section id="reviews" className="py-28 md:py-36 overflow-hidden [content-visibility:auto] [contain-intrinsic-size:auto_800px]">
       <div className="max-w-6xl mx-auto px-6">
         <Reveal className="max-w-xl mx-auto text-center mb-16">
           <p className="text-xs uppercase tracking-[0.3em] text-blood-bright mb-4">

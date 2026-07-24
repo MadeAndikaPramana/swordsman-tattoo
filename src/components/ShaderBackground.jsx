@@ -82,7 +82,8 @@ float noise(vec2 p) {
 float fbm(vec2 p) {
   float v = 0.0;
   float a = 0.5;
-  for (int i = 0; i < 5; i++) {
+  // 3 octaves (was 5) — cheaper, visually near-identical at this scale.
+  for (int i = 0; i < 3; i++) {
     v += a * noise(p);
     p = p * 2.03 + vec2(17.0, 9.2);
     a *= 0.5;
@@ -239,7 +240,7 @@ const UNIFORMS = {
   saturation: 0.95,
   hue: 0.0,
   vignette: 1.0,
-  blur: 0.0216,
+  blur: 0.0, // disabled: blur>0 makes the fragment shader run shade() 5x per pixel
   grain: 0.06,
   seed: 3505.0,
   rotate: 2.6005,
@@ -319,10 +320,12 @@ export default function ShaderBackground({ className }) {
     const start = performance.now()
 
     const resizeCanvas = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2)
+      // Cap dpr at 1.5 and the total pixel budget at ~1.1M (was 2, ~2M). The
+      // blur/glow hides the lower resolution; this ~halves fragment work.
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5)
       const rawWidth = Math.max(1, Math.round(bounds.width * dpr))
       const rawHeight = Math.max(1, Math.round(bounds.height * dpr))
-      const pixelScale = Math.min(1, Math.sqrt(2_000_000 / Math.max(1, rawWidth * rawHeight)))
+      const pixelScale = Math.min(1, Math.sqrt(1_100_000 / Math.max(1, rawWidth * rawHeight)))
       const width = Math.max(1, Math.round(rawWidth * pixelScale))
       const height = Math.max(1, Math.round(rawHeight * pixelScale))
       if (canvas.width !== width || canvas.height !== height) {

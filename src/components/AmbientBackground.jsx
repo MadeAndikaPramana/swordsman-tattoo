@@ -8,36 +8,22 @@ import { motion, useReducedMotion } from 'motion/react'
 export default function AmbientBackground() {
   const reduceMotion = useReducedMotion()
 
+  // Two blobs only, and we animate position (x/y) but NOT scale — animating
+  // scale on a huge blur forces the browser to re-rasterize the blur every
+  // frame; pure translate stays on the compositor and is nearly free.
   return (
     <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
       <motion.div
-        className="absolute w-[55vw] h-[55vw] rounded-full bg-blood/[0.08] blur-[100px]"
+        className="absolute w-[55vw] h-[55vw] rounded-full bg-blood/[0.09] blur-[100px] [will-change:transform]"
         style={{ top: '-15%', left: '-10%' }}
-        animate={
-          reduceMotion
-            ? undefined
-            : { x: ['0%', '25%', '5%', '0%'], y: ['0%', '20%', '45%', '0%'], scale: [1, 1.25, 0.9, 1] }
-        }
-        transition={{ duration: 38, repeat: Infinity, ease: 'easeInOut' }}
+        animate={reduceMotion ? undefined : { x: ['0%', '18%', '4%', '0%'], y: ['0%', '22%', '40%', '0%'] }}
+        transition={{ duration: 44, repeat: Infinity, ease: 'easeInOut' }}
       />
       <motion.div
-        className="absolute w-[45vw] h-[45vw] rounded-full bg-blood-bright/[0.06] blur-[90px]"
+        className="absolute w-[48vw] h-[48vw] rounded-full bg-blood-bright/[0.07] blur-[90px] [will-change:transform]"
         style={{ bottom: '-20%', right: '-10%' }}
-        animate={
-          reduceMotion
-            ? undefined
-            : { x: ['0%', '-30%', '-10%', '0%'], y: ['0%', '-25%', '10%', '0%'], scale: [1, 0.85, 1.2, 1] }
-        }
-        transition={{ duration: 46, repeat: Infinity, ease: 'easeInOut', delay: 4 }}
-      />
-      <motion.div
-        className="absolute w-[40vw] h-[40vw] rounded-full bg-blood/[0.05] blur-[110px] left-1/2 top-1/3 -translate-x-1/2"
-        animate={
-          reduceMotion
-            ? undefined
-            : { x: ['-10%', '15%', '-5%', '-10%'], y: ['0%', '30%', '10%', '0%'], scale: [1, 1.15, 0.95, 1] }
-        }
-        transition={{ duration: 52, repeat: Infinity, ease: 'easeInOut', delay: 8 }}
+        animate={reduceMotion ? undefined : { x: ['0%', '-22%', '-6%', '0%'], y: ['0%', '-20%', '8%', '0%'] }}
+        transition={{ duration: 54, repeat: Infinity, ease: 'easeInOut', delay: 5 }}
       />
     </div>
   )
