@@ -1,14 +1,24 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import { motion, AnimatePresence } from 'motion/react'
 import Reveal from '../components/Reveal'
 import PlaceholderImage from '../components/PlaceholderImage'
-import { PORTFOLIO, STYLES } from '../data/portfolio'
+import { PORTFOLIO, STYLES, styleToSlug } from '../data/portfolio'
 import { STUDIO } from '../constants'
 
 const FILTERS = ['All', ...STYLES]
 
 export default function Portfolio() {
-  const [active, setActive] = useState('All')
+  const { style: styleSlug } = useParams()
+  const styleFromUrl = STYLES.find((s) => styleToSlug(s) === styleSlug) || 'All'
+  const [active, setActive] = useState(styleFromUrl)
+
+  // keep the filter in sync when arriving via a /portfolio/:style link
+  // (e.g. clicking a Recent Work tile) rather than a fresh page load
+  useEffect(() => {
+    setActive(styleFromUrl)
+  }, [styleFromUrl])
+
   const items = active === 'All' ? PORTFOLIO : PORTFOLIO.filter((p) => p.style === active)
 
   return (
@@ -63,7 +73,7 @@ export default function Portfolio() {
                 <motion.div
                   whileHover="hover"
                   initial="rest"
-                  className="group relative h-[280px] overflow-hidden"
+                  className="relative h-[280px] overflow-hidden"
                 >
                   <motion.div
                     variants={{ rest: { scale: 1 }, hover: { scale: 1.06 } }}
@@ -72,18 +82,11 @@ export default function Portfolio() {
                   >
                     <PlaceholderImage label={it.style} src={it.src} className="absolute inset-0" />
                   </motion.div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/10 to-transparent flex items-end p-5 pointer-events-none">
-                    <span className="text-bone text-sm uppercase tracking-widest">{it.style}</span>
-                  </div>
                 </motion.div>
               </motion.div>
             ))}
           </AnimatePresence>
         </motion.div>
-
-        <p className="mt-10 text-center text-xs text-bone-dim/60">
-          Photos above are placeholder stock shots — swap in real portfolio work when ready.
-        </p>
       </div>
     </section>
   )

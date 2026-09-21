@@ -1,5 +1,7 @@
 export const STYLES = ['Fine Line', 'Traditional', 'Realism', 'Blackwork', 'Cover-Up', 'Piercing']
 
+export const styleToSlug = (style) => style.toLowerCase().replace(/\s+/g, '-')
+
 export const PORTFOLIO = [
   { id: 1, style: 'Fine Line', src: '/images/fine-line-1.jpg' },
   { id: 2, style: 'Fine Line', src: '/images/fine-line-2.jpg' },

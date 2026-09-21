@@ -2,7 +2,7 @@ import { motion } from 'motion/react'
 import { Link } from 'react-router-dom'
 import Reveal from './Reveal'
 import PlaceholderImage from './PlaceholderImage'
-import { PORTFOLIO } from '../data/portfolio'
+import { PORTFOLIO, styleToSlug } from '../data/portfolio'
 
 const teaser = PORTFOLIO.filter((p) => p.id % 2 === 1).slice(0, 6)
 
@@ -30,29 +30,27 @@ export default function GalleryTeaser() {
         <div className="grid sm:grid-cols-3 gap-4">
           {teaser.map((it, i) => (
             <Reveal key={it.id} delay={i * 0.08}>
-              <motion.div
-                whileHover="hover"
-                initial="rest"
-                className="group relative h-[260px] overflow-hidden"
-              >
+              <Link to={`/portfolio/${styleToSlug(it.style)}`} className="block">
                 <motion.div
-                  variants={{ rest: { scale: 1 }, hover: { scale: 1.06 } }}
-                  transition={{ duration: 0.4, ease: 'easeOut' }}
-                  className="absolute inset-0"
+                  whileHover="hover"
+                  initial="rest"
+                  className="group relative h-[260px] overflow-hidden"
                 >
-                  <PlaceholderImage label={it.style} src={it.src} className="absolute inset-0" />
+                  <motion.div
+                    variants={{ rest: { scale: 1 }, hover: { scale: 1.06 } }}
+                    transition={{ duration: 0.4, ease: 'easeOut' }}
+                    className="absolute inset-0"
+                  >
+                    <PlaceholderImage label={it.style} src={it.src} className="absolute inset-0" />
+                  </motion.div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/10 to-transparent flex items-end p-5 pointer-events-none">
+                    <span className="text-bone text-sm uppercase tracking-widest">{it.style}</span>
+                  </div>
                 </motion.div>
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/10 to-transparent flex items-end p-5 pointer-events-none">
-                  <span className="text-bone text-sm uppercase tracking-widest">{it.style}</span>
-                </div>
-              </motion.div>
+              </Link>
             </Reveal>
           ))}
         </div>
-
-        <p className="mt-8 text-center text-xs text-bone-dim/60">
-          Photos above are placeholder stock shots — swap in real portfolio work when ready.
-        </p>
       </div>
     </section>
   )
