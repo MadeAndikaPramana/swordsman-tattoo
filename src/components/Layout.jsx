@@ -8,19 +8,20 @@ export default function Layout() {
   const { pathname, hash } = useLocation()
 
   useEffect(() => {
-    if (!hash) {
-      window.scrollTo(0, 0)
-      return
-    }
-    const scrollToHash = () => {
+    const scrollToTarget = () => {
+      if (!hash) {
+        window.scrollTo(0, 0)
+        return
+      }
       const el = document.getElementById(hash.slice(1))
       if (el) el.scrollIntoView()
     }
-    scrollToHash()
-    // retry after paint + after load-time layout shifts, so late scroll
-    // resets (browser restoration, image loads) don't leave us at the top
-    const t1 = setTimeout(scrollToHash, 100)
-    const t2 = setTimeout(scrollToHash, 400)
+    scrollToTarget()
+    // retry after paint + after load-time layout shifts (web font swap,
+    // mobile address-bar resize, image/canvas loads), so a late shift
+    // doesn't leave the page scrolled past where it should land
+    const t1 = setTimeout(scrollToTarget, 100)
+    const t2 = setTimeout(scrollToTarget, 400)
     return () => {
       clearTimeout(t1)
       clearTimeout(t2)
