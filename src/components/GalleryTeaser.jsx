@@ -4,7 +4,9 @@ import Reveal from './Reveal'
 import PlaceholderImage from './PlaceholderImage'
 import { PORTFOLIO, styleToSlug } from '../data/portfolio'
 
-const teaser = PORTFOLIO.filter((p) => p.id % 2 === 1).slice(0, 6)
+// Newest first — ids are assigned sequentially by the admin uploader, so the
+// highest ids are the most recently added photos.
+const teaser = [...PORTFOLIO].sort((a, b) => b.id - a.id).slice(0, 6)
 
 export default function GalleryTeaser() {
   return (
