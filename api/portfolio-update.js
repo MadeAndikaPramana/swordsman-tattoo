@@ -2,6 +2,10 @@ import { getGithubConfig, getPortfolioJson, commitPortfolioChanges } from './_gi
 
 const MAX_ADDITIONS_PER_REQUEST = 10
 const ALLOWED_EXTENSIONS = new Set(['jpg', 'jpeg', 'png', 'webp'])
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+// Same reasoning as admin-login.js — slows down brute-force password
+// guessing against this endpoint too, since it also accepts a password.
+const FAILED_AUTH_DELAY_MS = 900
 
 function slugifyFilename(name) {
   return name
@@ -35,6 +39,7 @@ export default async function handler(req, res) {
   const { password, additions = [], deletions = [] } = req.body || {}
 
   if (password !== adminPassword) {
+    await sleep(FAILED_AUTH_DELAY_MS)
     res.status(401).json({ error: 'Incorrect password.' })
     return
   }

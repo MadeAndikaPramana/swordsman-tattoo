@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
+import { useDocumentHead } from '../hooks/useDocumentHead'
 
 export default function NotFound() {
+  useDocumentHead({ title: 'Page Not Found' })
+
   return (
     <section className="min-h-screen flex items-center justify-center px-6">
       <Reveal className="text-center max-w-md">

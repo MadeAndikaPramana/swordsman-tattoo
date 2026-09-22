@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Reveal from '../components/Reveal'
 import FlowPaths from '../components/FlowPaths'
+import { useDocumentHead } from '../hooks/useDocumentHead'
 import { TEAM } from '../data/team'
 import { STYLES } from '../data/portfolio'
 import { STUDIO } from '../constants'
@@ -8,6 +9,11 @@ import { STUDIO } from '../constants'
 const ARTIST_OPTIONS = ['No preference', ...TEAM.filter((t) => t.artist).map((t) => t.name)]
 
 export default function Book() {
+  useDocumentHead({
+    title: 'Book a Session',
+    description: 'Book your tattoo or piercing session at Swordsman Tattoo Studio Bali — fill in a few details and continue straight to WhatsApp.',
+  })
+
   const [form, setForm] = useState({
     name: '',
     contact: '',

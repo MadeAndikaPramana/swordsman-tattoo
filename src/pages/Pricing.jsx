@@ -1,5 +1,6 @@
 import Reveal from '../components/Reveal'
 import Accordion from '../components/Accordion'
+import { useDocumentHead } from '../hooks/useDocumentHead'
 import { STUDIO } from '../constants'
 
 const FACTORS = [
@@ -50,6 +51,11 @@ const AFTERCARE = [
 ]
 
 export default function Pricing() {
+  useDocumentHead({
+    title: 'Pricing & FAQ',
+    description: 'What affects tattoo pricing at Swordsman Tattoo Studio Bali, plus answers to common booking questions.',
+  })
+
   return (
     <section className="pt-36 pb-28 md:pb-36">
       <div className="max-w-4xl mx-auto px-6">

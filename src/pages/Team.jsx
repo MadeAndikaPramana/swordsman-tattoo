@@ -1,9 +1,15 @@
 import Reveal from '../components/Reveal'
 import PlaceholderImage from '../components/PlaceholderImage'
+import { useDocumentHead } from '../hooks/useDocumentHead'
 import { TEAM } from '../data/team'
 import { STUDIO } from '../constants'
 
 export default function Team() {
+  useDocumentHead({
+    title: 'Our Team',
+    description: `Meet the artists behind Swordsman Tattoo Studio Bali's ${STUDIO.rating}★-rated work in Legian, Kuta.`,
+  })
+
   return (
     <section className="pt-36 pb-28 md:pb-36">
       <div className="max-w-6xl mx-auto px-6">

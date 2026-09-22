@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { motion, AnimatePresence } from 'motion/react'
 import Reveal from '../components/Reveal'
 import PlaceholderImage from '../components/PlaceholderImage'
+import { useDocumentHead } from '../hooks/useDocumentHead'
 import { PORTFOLIO, STYLES, styleToSlug } from '../data/portfolio'
 import { STUDIO } from '../constants'
 
@@ -18,6 +19,14 @@ export default function Portfolio() {
   useEffect(() => {
     setActive(styleFromUrl)
   }, [styleFromUrl])
+
+  useDocumentHead({
+    title: active === 'All' ? 'Portfolio' : `${active} Tattoos — Portfolio`,
+    description:
+      active === 'All'
+        ? 'Browse the full tattoo portfolio from Swordsman Tattoo Studio Bali — fine line, traditional, realism, blackwork, cover-ups & piercing.'
+        : `${active} tattoo work from Swordsman Tattoo Studio Bali in Legian, Kuta.`,
+  })
 
   const items = active === 'All' ? PORTFOLIO : PORTFOLIO.filter((p) => p.style === active)
 
