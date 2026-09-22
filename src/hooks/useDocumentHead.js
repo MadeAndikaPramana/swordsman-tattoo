@@ -3,6 +3,9 @@ import { useEffect } from 'react'
 const SITE_NAME = 'Swordsman Tattoo Studio Bali'
 const DEFAULT_DESCRIPTION =
   'Swordsman Tattoo Studio Bali — custom tattoos & piercing in Legian, Kuta. Book via WhatsApp.'
+// Same domain used in index.html's OG tags and public/sitemap.xml — update
+// all three together if/when a custom domain is added.
+const SITE_URL = 'https://swordsman-tattoo.vercel.app'
 
 function setMeta(name, content) {
   let el = document.querySelector(`meta[name="${name}"]`)
@@ -12,6 +15,16 @@ function setMeta(name, content) {
     document.head.appendChild(el)
   }
   el.setAttribute('content', content)
+}
+
+function setCanonical(href) {
+  let el = document.querySelector('link[rel="canonical"]')
+  if (!el) {
+    el = document.createElement('link')
+    el.setAttribute('rel', 'canonical')
+    document.head.appendChild(el)
+  }
+  el.setAttribute('href', href)
 }
 
 // Sets the browser tab title + meta description per page. Note: this runs
@@ -30,5 +43,10 @@ export function useDocumentHead({ title, description }) {
     // previous page's description sticks around (confirmed bug: NotFound
     // was inheriting Book's description when reached from /book)
     setMeta('description', description || DEFAULT_DESCRIPTION)
+    // self-referencing canonical, e.g. /portfolio/fine-line canonicalizes
+    // to itself (not /portfolio) since each style filter shows genuinely
+    // different content and each has its own title/description + sitemap
+    // entry — they're meant to be indexed as their own pages, not merged
+    setCanonical(`${SITE_URL}${window.location.pathname}`)
   }, [title, description])
 }

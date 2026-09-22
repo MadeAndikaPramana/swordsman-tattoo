@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Swordsman Tattoo Studio Bali — custom tattoos & piercing in Legian, Kuta. Book via WhatsApp." />
     <title>Swordsman Tattoo Studio Bali</title>
+    <!-- fallback for crawlers that don't run JS; useDocumentHead overrides this per-route once React mounts -->
+    <link rel="canonical" href="https://swordsman-tattoo.vercel.app/" />
 
     <!--
       Social preview (OG/Twitter) tags. This is a client-rendered SPA with no
@@ -34,6 +36,54 @@
       content="Custom tattoos & piercing in Legian, Kuta — 4.9★ on Google. Book via WhatsApp."
     />
     <meta name="twitter:image" content="https://swordsman-tattoo.vercel.app/images/studio.jpg" />
+
+    <!--
+      LocalBusiness structured data (schema.org / JSON-LD). Static and
+      site-wide by design — this describes the business itself, not a
+      specific page, so it doesn't need to vary per route the way
+      title/description do. Helps Google show rich results (rating, hours,
+      address) directly in search listings. reviewCount/ratingValue are the
+      real, verified numbers from the studio's Google Maps listing — update
+      here if they change materially.
+    -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Swordsman Tattoo Studio Bali",
+        "image": "https://swordsman-tattoo.vercel.app/images/studio.jpg",
+        "url": "https://swordsman-tattoo.vercel.app/",
+        "telephone": "+62 878-5583-1808",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Jl. Raya Legian No.466",
+          "addressLocality": "Legian",
+          "addressRegion": "Bali",
+          "postalCode": "80361",
+          "addressCountry": "ID"
+        },
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "10:00",
+          "closes": "22:00"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "reviewCount": "179"
+        },
+        "sameAs": ["https://www.instagram.com/swordsmantattoostudiobali/"]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
