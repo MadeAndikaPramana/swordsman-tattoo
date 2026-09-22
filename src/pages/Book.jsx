@@ -3,7 +3,7 @@ import Reveal from '../components/Reveal'
 import FlowPaths from '../components/FlowPaths'
 import { useDocumentHead } from '../hooks/useDocumentHead'
 import { TEAM } from '../data/team'
-import { STYLES } from '../data/portfolio'
+import { PLACEMENTS } from '../data/portfolio'
 import { STUDIO } from '../constants'
 
 const ARTIST_OPTIONS = ['No preference', ...TEAM.filter((t) => t.artist).map((t) => t.name)]
@@ -18,7 +18,7 @@ export default function Book() {
     name: '',
     contact: '',
     artist: ARTIST_OPTIONS[0],
-    style: STYLES[0],
+    placement: PLACEMENTS[0],
     date: '',
     message: '',
   })
@@ -32,7 +32,7 @@ export default function Book() {
       `Name: ${form.name}`,
       `Contact: ${form.contact}`,
       `Preferred artist: ${form.artist}`,
-      `Style: ${form.style}`,
+      `Placement: ${form.placement}`,
       form.date ? `Preferred date: ${form.date}` : null,
       form.message ? `Details: ${form.message}` : null,
     ].filter(Boolean)
@@ -105,12 +105,12 @@ export default function Book() {
               </div>
               <div>
                 <label className="block text-xs uppercase tracking-widest text-bone-dim mb-2">
-                  Style
+                  Placement
                 </label>
-                <select value={form.style} onChange={update('style')} className={inputClass}>
-                  {STYLES.map((s) => (
-                    <option key={s} value={s} className="bg-ink">
-                      {s}
+                <select value={form.placement} onChange={update('placement')} className={inputClass}>
+                  {PLACEMENTS.map((p) => (
+                    <option key={p} value={p} className="bg-ink">
+                      {p}
                     </option>
                   ))}
                 </select>

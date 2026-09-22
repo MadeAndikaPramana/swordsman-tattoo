@@ -13,19 +13,23 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://swordsman-tattoo.vercel.app/portfolio/fine-line</loc>
+    <loc>https://swordsman-tattoo.vercel.app/portfolio/arm</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://swordsman-tattoo.vercel.app/portfolio/traditional</loc>
+    <loc>https://swordsman-tattoo.vercel.app/portfolio/leg</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://swordsman-tattoo.vercel.app/portfolio/realism</loc>
+    <loc>https://swordsman-tattoo.vercel.app/portfolio/back</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://swordsman-tattoo.vercel.app/portfolio/blackwork</loc>
+    <loc>https://swordsman-tattoo.vercel.app/portfolio/chest</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://swordsman-tattoo.vercel.app/portfolio/hand</loc>
     <priority>0.6</priority>
   </url>
   <url>

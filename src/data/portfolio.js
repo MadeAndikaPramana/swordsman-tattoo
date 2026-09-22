@@ -1,12 +1,13 @@
 import portfolioData from './portfolio.json'
 
-// The fixed set of tattoo styles the site filters by. Adding photos through
-// /admin only ever picks from this list — it isn't itself editable there,
-// since changing the taxonomy is a bigger structural change than adding a
-// photo.
-export const STYLES = ['Fine Line', 'Traditional', 'Realism', 'Blackwork', 'Cover-Up', 'Piercing']
+// Body-placement categories, not tattoo art styles — chosen deliberately so
+// a non-technical owner can categorize their own uploads at a glance (which
+// body part is obviously easier to identify than which art style). Cover-Up
+// and Piercing stay as their own categories since they're distinct services
+// customers look for specifically, not a body location.
+export const PLACEMENTS = ['Arm', 'Leg', 'Back', 'Chest', 'Hand', 'Cover-Up', 'Piercing']
 
-export const styleToSlug = (style) => style.toLowerCase().replace(/\s+/g, '-')
+export const placementToSlug = (placement) => placement.toLowerCase().replace(/\s+/g, '-')
 
 // Lives in portfolio.json (not inline here) so the /admin serverless
 // function can read + rewrite it as plain JSON via the GitHub API, without

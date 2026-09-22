@@ -4,31 +4,31 @@ import { motion, AnimatePresence } from 'motion/react'
 import Reveal from '../components/Reveal'
 import PlaceholderImage from '../components/PlaceholderImage'
 import { useDocumentHead } from '../hooks/useDocumentHead'
-import { PORTFOLIO, STYLES, styleToSlug } from '../data/portfolio'
+import { PORTFOLIO, PLACEMENTS, placementToSlug } from '../data/portfolio'
 import { STUDIO } from '../constants'
 
-const FILTERS = ['All', ...STYLES]
+const FILTERS = ['All', ...PLACEMENTS]
 
 export default function Portfolio() {
-  const { style: styleSlug } = useParams()
-  const styleFromUrl = STYLES.find((s) => styleToSlug(s) === styleSlug) || 'All'
-  const [active, setActive] = useState(styleFromUrl)
+  const { placement: placementSlug } = useParams()
+  const placementFromUrl = PLACEMENTS.find((p) => placementToSlug(p) === placementSlug) || 'All'
+  const [active, setActive] = useState(placementFromUrl)
 
-  // keep the filter in sync when arriving via a /portfolio/:style link
+  // keep the filter in sync when arriving via a /portfolio/:placement link
   // (e.g. clicking a Recent Work tile) rather than a fresh page load
   useEffect(() => {
-    setActive(styleFromUrl)
-  }, [styleFromUrl])
+    setActive(placementFromUrl)
+  }, [placementFromUrl])
 
   useDocumentHead({
     title: active === 'All' ? 'Portfolio' : `${active} Tattoos — Portfolio`,
     description:
       active === 'All'
-        ? 'Browse the full tattoo portfolio from Swordsman Tattoo Studio Bali — fine line, traditional, realism, blackwork, cover-ups & piercing.'
+        ? 'Browse the full tattoo portfolio from Swordsman Tattoo Studio Bali — arm, leg, back, chest, hand, cover-ups & piercing.'
         : `${active} tattoo work from Swordsman Tattoo Studio Bali in Legian, Kuta.`,
   })
 
-  const items = active === 'All' ? PORTFOLIO : PORTFOLIO.filter((p) => p.style === active)
+  const items = active === 'All' ? PORTFOLIO : PORTFOLIO.filter((p) => p.placement === active)
 
   return (
     <section className="pt-36 pb-28 md:pb-36">
@@ -39,7 +39,7 @@ export default function Portfolio() {
             Full Gallery
           </h1>
           <p className="text-bone-dim">
-            Browse work by style, or follow{' '}
+            Browse work by placement, or follow{' '}
             <a
               href={STUDIO.instagram}
               target="_blank"
@@ -89,7 +89,7 @@ export default function Portfolio() {
                     transition={{ duration: 0.4, ease: 'easeOut' }}
                     className="absolute inset-0"
                   >
-                    <PlaceholderImage label={it.style} src={it.src} className="absolute inset-0" />
+                    <PlaceholderImage label={it.placement} src={it.src} className="absolute inset-0" />
                   </motion.div>
                 </motion.div>
               </motion.div>
