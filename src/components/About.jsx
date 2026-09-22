@@ -1,7 +1,9 @@
-import { motion } from 'motion/react'
+import { useEffect, useState } from 'react'
+import { motion, AnimatePresence } from 'motion/react'
 import Reveal from './Reveal'
 import PlaceholderImage from './PlaceholderImage'
 import { STUDIO } from '../constants'
+import { BRANCHES } from '../data/branches'
 
 const stats = [
   { value: `${STUDIO.rating}★`, label: 'Google Rating' },
@@ -9,26 +11,78 @@ const stats = [
   { value: '1000+', label: 'Tattoos Done' },
 ]
 
+const AUTO_SWIPE_MS = 4000
+
+function BranchCarousel() {
+  const [index, setIndex] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const branch = BRANCHES[index]
+
+  useEffect(() => {
+    if (paused) return
+    const t = setInterval(() => setIndex((i) => (i + 1) % BRANCHES.length), AUTO_SWIPE_MS)
+    return () => clearInterval(t)
+  }, [paused])
+
+  return (
+    <div
+      className="relative aspect-[4/5] w-full overflow-hidden"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={branch.id}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
+          className="absolute inset-0"
+        >
+          <PlaceholderImage label={`${branch.short} Studio`} src={branch.src} className="absolute inset-0" />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-transparent to-transparent flex items-end p-5 pointer-events-none">
+            <div>
+              <p className="text-bone text-sm uppercase tracking-widest">{branch.short}</p>
+              <p className="text-bone-dim/70 text-xs">{branch.country}</p>
+            </div>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+
+      {/* dots */}
+      <div className="absolute top-4 right-4 flex gap-1.5 z-10">
+        {BRANCHES.map((b, i) => (
+          <button
+            key={b.id}
+            onClick={() => setIndex(i)}
+            aria-label={`Show ${b.short}`}
+            className={`w-1.5 h-1.5 rounded-full transition-colors ${
+              i === index ? 'bg-bone' : 'bg-bone/30 hover:bg-bone/60'
+            }`}
+          />
+        ))}
+      </div>
+
+      <motion.div
+        key={`badge-${branch.id}`}
+        initial={{ opacity: 0, x: -20, y: 20 }}
+        animate={{ opacity: 1, x: 0, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="hidden sm:block absolute -bottom-6 -right-6 bg-blood px-6 py-5 z-10"
+      >
+        <p className="font-display text-4xl text-bone">{branch.rating}★</p>
+        <p className="text-[10px] uppercase tracking-widest text-bone/80">{branch.reviewCount} reviews</p>
+      </motion.div>
+    </div>
+  )
+}
+
 export default function About() {
   return (
     <section id="about" className="py-28 md:py-36 [content-visibility:auto] [contain-intrinsic-size:auto_900px]">
       <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
         <Reveal className="relative">
-          <PlaceholderImage
-            label="Studio Photo"
-            src="/images/studio.jpg"
-            className="relative aspect-[4/5] w-full"
-          />
-          <motion.div
-            initial={{ opacity: 0, x: -20, y: 20 }}
-            whileInView={{ opacity: 1, x: 0, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="hidden sm:block absolute -bottom-6 -right-6 bg-blood px-6 py-5"
-          >
-            <p className="font-display text-4xl text-bone">{STUDIO.rating}★</p>
-            <p className="text-[10px] uppercase tracking-widest text-bone/80">Google Reviews</p>
-          </motion.div>
+          <BranchCarousel />
         </Reveal>
 
         <div>
@@ -46,11 +100,11 @@ export default function About() {
           </Reveal>
           <Reveal delay={0.2}>
             <p className="text-bone-dim leading-relaxed mb-6">
-              Nestled on Jl. Raya Legian, Swordsman Tattoo Studio brings together
-              seasoned artists working across fine line, traditional, realism and
-              custom design. Every session runs on single-use needles, hospital-grade
-              sterilization, and an eye for detail — whether it's your first tattoo
-              or your fifteenth.
+              With 3 studios across Legian, Kuta, and Nar Nar Goon (Victoria, Australia),
+              Swordsman brings together seasoned artists working across fine line,
+              traditional, realism and custom design. Every session runs on single-use
+              needles, hospital-grade sterilization, and an eye for detail — whether it's
+              your first tattoo or your fifteenth.
             </p>
           </Reveal>
           <Reveal delay={0.3}>

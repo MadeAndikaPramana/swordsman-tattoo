@@ -2,11 +2,16 @@ import { useState } from 'react'
 import Reveal from '../components/Reveal'
 import FlowPaths from '../components/FlowPaths'
 import { useDocumentHead } from '../hooks/useDocumentHead'
-import { TEAM } from '../data/team'
+import { BRANCHES } from '../data/branches'
 import { PLACEMENTS } from '../data/portfolio'
 import { STUDIO } from '../constants'
 
-const ARTIST_OPTIONS = ['No preference', ...TEAM.filter((t) => t.artist).map((t) => t.name)]
+// Booking is scoped to the primary (Legian) branch's artists for now — the
+// form doesn't have a branch selector yet.
+const ARTIST_OPTIONS = [
+  'No preference',
+  ...BRANCHES.find((b) => b.id === 'legian').team.map((t) => t.name),
+]
 
 export default function Book() {
   useDocumentHead({

@@ -1,17 +1,25 @@
+import { BRANCHES } from './data/branches'
+
+const primary = BRANCHES.find((b) => b.id === 'legian')
+
+// Primary studio identity for the whole site (hero, JSON-LD, contact links,
+// etc). Sourced from the Legian branch's own Google Maps listing
+// (Jl. Raya Legian No.398) — NOT the No.466 listing this site originally
+// used, which turned out to be the wrong address for this business.
 export const STUDIO = {
   name: 'Swordsman Tattoo Studio',
   location: 'Bali',
-  rating: 4.9,
-  address: 'Jl. Raya Legian No.466, Legian, Kec. Kuta, Kabupaten Badung, Bali 80361',
-  hours: 'Open daily · 10:00 – 22:00',
-  phoneDisplay: '+62 878-5583-1808',
-  whatsapp: 'https://wa.me/6287855831808',
+  rating: primary.rating,
+  address: primary.address,
+  hours: primary.hours,
+  phoneDisplay: primary.phoneDisplay,
+  whatsapp: primary.whatsapp,
   email: 'swordsmantattoostudiobali@gmail.com',
   instagram: 'https://www.instagram.com/swordsmantattoostudiobali/',
   instagramHandle: '@swordsmantattoostudiobali',
-  mapsLink: 'https://maps.app.goo.gl/XK3SZUnhQ8Hc5oKx5',
-  mapsEmbed:
-    'https://www.google.com/maps?q=Swordsman+Tattoo+Studio+Bali,+Jl.+Raya+Legian+No.466,+Legian,+Kuta,+Bali&output=embed',
+  mapsLink: primary.mapsLink,
+  mapsEmbed: primary.mapsEmbed,
+  reviewCount: primary.reviewCount,
 }
 
 export const NAV_LINKS = [

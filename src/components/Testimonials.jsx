@@ -2,33 +2,34 @@ import { motion } from 'motion/react'
 import Reveal from './Reveal'
 import { STUDIO } from '../constants'
 
-// Real Google reviews for Swordsman Tattoo Studio Bali (4.9★, 179 reviews).
-// Pulled from the studio's public Google Maps listing.
-// NOTE: Google's logged-out view only exposes a few reviews. Victoria's and
-// Jane's were originally written in English but only Google's auto-translation
-// was available, so their text is restored to natural English (meaning-faithful,
-// not guaranteed verbatim). Arca's is translated from Indonesian. Replace with
-// exact text from the studio's Google Business dashboard when available.
+// Real Google reviews for Swordsman Tattoo Studio Legian (4.9★, 258 reviews
+// as of research), pulled from THIS location's own Google Maps listing
+// (Jl. Raya Legian No.398). An earlier version of this file used reviews
+// from a different, incorrectly-identified listing (No.466) — replaced.
+// Hayden's, Teresa's, and Kelly's were auto-translated by Google from
+// Indonesian; restored to natural English (meaning-faithful, not guaranteed
+// verbatim). The Dutch review is translated from Dutch. Replace with exact
+// text from the studio's Google Business dashboard when available.
 const REVIEWS = [
   {
-    name: 'Victoria Brne',
-    meta: '1 month ago',
-    text: "I've been here three times now and always had an amazing experience. Ake is my artist and I'm so happy with his work — Cindy and Nancy were super helpful too. Everything clean and comfortable, highly recommended!",
+    name: 'Hayden Bramwell',
+    meta: '4 months ago',
+    text: "Completed my full outer arm sleeve over 2 days with Herman. He's absolutely brilliant! So much of it hand-drawn and the results are amazing. Definitely coming back to finish the inner part!",
   },
   {
-    name: 'Jane Freer',
-    meta: '6 months ago',
-    text: "So happy with Eka's work today — I love it. Friendly, clean studio and highly recommended for anyone wanting a tattoo while in Bali. Thank you 😊",
+    name: 'Teresa Mesch',
+    meta: '4 months ago',
+    text: 'Mike and his crew were amazing today. Getting my 2nd tattoo and I was so nervous. Thank you all for making me laugh and creating lasting memories — the result is beautiful, simple but right on point.',
+  },
+  {
+    name: 'Kelly Evans',
+    meta: '4 months ago',
+    text: 'My partner and I came in for tattoos. The shop is great, the people are fantastic and so friendly! We\'ll be back next time we\'re here. Great work!',
   },
   {
     name: 'Google reviewer',
     meta: '1 year ago',
-    text: 'Excellent work, did exactly as I shown them! Amazing tattoo artists! Thank you for some great work.',
-  },
-  {
-    name: 'Arca Fabian',
-    meta: '2 years ago',
-    text: "Great spot and the staff are so warm and friendly. And the tattoos are excellent, of course — don't forget to drop by when you're in Bali!",
+    text: "Asked for really thin lines, true fine line work, and this is the result — turned out super nice. Tattooed by Eka. Also just super lovely people, thank you!",
   },
 ]
 
@@ -79,7 +80,7 @@ export default function Testimonials() {
             Reviews
           </p>
           <h2 className="font-display text-4xl md:text-5xl leading-[1.05] text-bone mb-4">
-            {STUDIO.rating}★ from 179 reviews
+            {STUDIO.rating}★ from {STUDIO.reviewCount} reviews
           </h2>
           <p className="text-bone-dim text-sm">
             What clients say after the ink settles —{' '}
