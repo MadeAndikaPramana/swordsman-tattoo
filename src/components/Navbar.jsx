@@ -24,8 +24,10 @@ export default function Navbar() {
       }`}
     >
       <nav className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
-        <Link to="/" className="flex items-center">
-          <img src="/logo.png" alt="Swordsman Tattoo" className="h-11 w-11" />
+        <Link to="/" className="flex items-center gap-2">
+          <img src="/logo-bali.png" alt="Swordsman Tattoo Bali" className="h-10 w-10" />
+          <img src="/logo-legian.png" alt="Swordsman Tattoo Legian" className="h-10 w-10" />
+          <img src="/logo-kuta.png" alt="Swordsman Tattoo Kuta" className="h-10 w-10" />
         </Link>
 
         <ul className="hidden lg:flex items-center gap-7 text-sm uppercase tracking-widest text-bone-dim">
