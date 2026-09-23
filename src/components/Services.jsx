@@ -1,38 +1,28 @@
+import { motion } from 'motion/react'
+import { Link } from 'react-router-dom'
 import Reveal from './Reveal'
-import SpotlightCard from './SpotlightCard'
+import PlaceholderImage from './PlaceholderImage'
+import { PORTFOLIO, CATEGORIES, categoryToSlug } from '../data/portfolio'
 
-const services = [
-  {
-    num: '01',
-    title: 'Custom Tattoo',
-    desc: 'One-on-one consultation to design a piece built entirely around your idea.',
-  },
-  {
-    num: '02',
-    title: 'Fine Line',
-    desc: 'Delicate, precise linework — minimalist designs with lasting clarity.',
-  },
-  {
-    num: '03',
-    title: 'Traditional & Bold',
-    desc: 'Classic flash-style tattoos with strong lines and saturated color.',
-  },
-  {
-    num: '04',
-    title: 'Realism',
-    desc: 'Portrait and detailed realism work executed with careful shading.',
-  },
-  {
-    num: '05',
-    title: 'Cover-Up',
-    desc: 'Reworking old tattoos into something you\'ll want to show off again.',
-  },
-  {
-    num: '06',
-    title: 'Piercing',
-    desc: 'Professional piercing services in a clean, sterile environment.',
-  },
-]
+const DESCRIPTIONS = {
+  Piercing: 'Professional piercing services in a clean, sterile environment.',
+  'Water Color': 'Vivid, painterly color work with soft, blended washes.',
+  Polynesian: 'Bold tribal patterns rooted in Polynesian tradition.',
+  Fineline: 'Delicate, precise linework — minimalist designs with lasting clarity.',
+  Color: 'Vibrant, saturated color tattoos built for detail.',
+  'Cover Up': "Reworking old tattoos into something you'll want to show off again.",
+  'Full Back': 'Large-scale back pieces built session by session.',
+  'Full Sleeve': 'Full arm coverage, from shoulder to wrist.',
+  'Full Leg': 'Full leg coverage with cohesive large-scale design.',
+}
+
+// One representative photo per category, pulled straight from the gallery —
+// newest upload in that category first — so Services stays in sync with
+// whatever's actually in the portfolio instead of drifting out of date.
+const services = CATEGORIES.map((category) => {
+  const cover = [...PORTFOLIO].reverse().find((p) => p.category === category)
+  return { category, cover, desc: DESCRIPTIONS[category] }
+})
 
 export default function Services() {
   return (
@@ -50,16 +40,28 @@ export default function Services() {
           </h2>
         </Reveal>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-bone/10">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {services.map((s, i) => (
-            <Reveal key={s.num} delay={i * 0.06} className="bg-ink-soft h-full">
-              <SpotlightCard className="h-full p-8 flex flex-col gap-6">
-                <span className="font-display text-2xl text-blood-bright">{s.num}</span>
-                <div>
-                  <h3 className="text-lg font-semibold text-bone mb-2">{s.title}</h3>
-                  <p className="text-sm text-bone-dim leading-relaxed">{s.desc}</p>
-                </div>
-              </SpotlightCard>
+            <Reveal key={s.category} delay={i * 0.06}>
+              <Link to={`/portfolio/${categoryToSlug(s.category)}`} className="block">
+                <motion.div
+                  whileHover="hover"
+                  initial="rest"
+                  className="group relative h-[300px] overflow-hidden"
+                >
+                  <motion.div
+                    variants={{ rest: { scale: 1 }, hover: { scale: 1.06 } }}
+                    transition={{ duration: 0.4, ease: 'easeOut' }}
+                    className="absolute inset-0"
+                  >
+                    <PlaceholderImage label={s.category} src={s.cover?.src} className="absolute inset-0" />
+                  </motion.div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/40 to-transparent flex flex-col justify-end p-6 pointer-events-none">
+                    <h3 className="text-lg font-semibold text-bone mb-1">{s.category}</h3>
+                    <p className="text-sm text-bone-dim leading-relaxed">{s.desc}</p>
+                  </div>
+                </motion.div>
+              </Link>
             </Reveal>
           ))}
         </div>
