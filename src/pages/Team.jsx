@@ -10,7 +10,8 @@ import { STUDIO } from '../constants'
 export default function Team() {
   const { branch: branchId } = useParams()
   const navigate = useNavigate()
-  const active = BRANCHES.find((b) => b.id === branchId) || BRANCHES[0]
+  const active =
+    BRANCHES.find((b) => b.id === branchId) || BRANCHES.find((b) => b.id === 'legian')
 
   useEffect(() => {
     // land on /team with no branch in the URL -> default to Legian without a redirect loop

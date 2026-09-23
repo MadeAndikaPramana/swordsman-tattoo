@@ -11,7 +11,7 @@ const stats = [
   { value: '1000+', label: 'Tattoos Done' },
 ]
 
-const AUTO_SWIPE_MS = 4000
+const AUTO_SWIPE_MS = 1000
 
 function BranchCarousel() {
   const [index, setIndex] = useState(0)
@@ -24,11 +24,21 @@ function BranchCarousel() {
     return () => clearInterval(t)
   }, [paused])
 
+  // Only pause on hover for mouse/trackpad users — on touch devices a tap can
+  // fire a synthetic mouseenter with no matching mouseleave, which would
+  // otherwise freeze the carousel permanently after the first tap.
+  const pauseIfMouse = (e) => {
+    if (e.pointerType === 'mouse') setPaused(true)
+  }
+  const resumeIfMouse = (e) => {
+    if (e.pointerType === 'mouse') setPaused(false)
+  }
+
   return (
     <div
       className="relative aspect-[4/5] w-full overflow-hidden"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
+      onPointerEnter={pauseIfMouse}
+      onPointerLeave={resumeIfMouse}
     >
       <AnimatePresence mode="wait">
         <motion.div
@@ -100,9 +110,10 @@ export default function About() {
           </Reveal>
           <Reveal delay={0.2}>
             <p className="text-bone-dim leading-relaxed mb-6">
-              With 3 studios across Legian, Kuta, and Nar Nar Goon (Victoria, Australia),
-              Swordsman brings together seasoned artists working across fine line,
-              traditional, realism and custom design. Every session runs on single-use
+              With 3 studios across Bali — Legian, Kuta, and our original
+              location — Swordsman brings together seasoned artists working
+              across fine line, traditional,
+              realism and custom design. Every session runs on single-use
               needles, hospital-grade sterilization, and an eye for detail — whether it's
               your first tattoo or your fifteenth.
             </p>

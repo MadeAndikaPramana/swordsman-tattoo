@@ -1,16 +1,49 @@
-// Real data for all 3 Swordsman Tattoo locations, sourced directly from each
-// location's own Google Maps listing (address, phone, rating, review count)
-// plus artist names actually mentioned by name in that location's reviews —
-// never invented. Legian (Jl. Raya Legian No.398) is the primary/default
-// branch this site represents; Kuta and Nar Nar Goon (Victoria, Australia)
-// are sister locations shown via the branch switcher (Team page) and the
-// About section carousel.
-//
-// Note on Nar Nar Goon: a public review on that listing states the Victoria
-// and Bali studios have different owners/artists. Included here per an
-// explicit decision after flagging this — confirm directly with the studio
-// if this needs re-checking.
+// All 3 Swordsman locations are in Bali. Legian (No.398) is the primary /
+// flagship listing (used to derive STUDIO in constants.js). "Bali" (No.466)
+// and Kuta are separate real branches — an earlier version of this file
+// mistakenly treated No.466 as the wrong listing and dropped it; it is a
+// real second branch, just not the primary one, and a Nar Nar Goon /
+// Australia branch that appeared briefly was a mix-up — there is no
+// Australian location.
 export const BRANCHES = [
+  {
+    id: 'bali',
+    short: 'Bali',
+    name: 'Swordsman Tattoo Studio Bali',
+    country: 'Bali, Indonesia',
+    address: 'Jl. Raya Legian No.466, Legian, Kec. Kuta, Kabupaten Badung, Bali 80361',
+    phoneDisplay: '+62 878-5583-1808',
+    whatsapp: 'https://wa.me/6287855831808',
+    hours: 'Open daily · 10:00 – 22:00',
+    rating: 4.9,
+    reviewCount: 179,
+    mapsLink: 'https://maps.app.goo.gl/XK3SZUnhQ8Hc5oKx5',
+    mapsEmbed:
+      'https://www.google.com/maps?q=Swordsman+Tattoo+Studio+Bali,+Jl.+Raya+Legian+No.466,+Legian,+Kuta,+Bali&output=embed',
+    src: '/branches/bali.jpg',
+    team: [
+      {
+        name: 'Ake',
+        role: 'Tattoo Artist',
+        bio: 'A resident tattoo artist working custom pieces for a steady stream of returning clients — from fine line to bold traditional.',
+      },
+      {
+        name: 'Eka',
+        role: 'Tattoo Artist',
+        bio: 'Resident tattoo artist known for clean, detailed work that keeps clients coming back on every trip to Bali.',
+      },
+      {
+        name: 'Cindy',
+        role: 'Studio Team',
+        bio: 'Part of the front-of-house team — keeping the space spotless and every visit welcoming from the moment you walk in.',
+      },
+      {
+        name: 'Nancy',
+        role: 'Studio Team',
+        bio: 'Client care and studio support, making sure your booking, consultation, and session all run smoothly.',
+      },
+    ],
+  },
   {
     id: 'legian',
     short: 'Legian',
@@ -25,21 +58,22 @@ export const BRANCHES = [
     mapsLink: 'https://www.google.com/maps/search/Swordsman+Tattoo+Studio+Legian+Jl+Raya+Legian+No.398',
     mapsEmbed:
       'https://www.google.com/maps?q=Swordsman+Tattoo+Studio+Legian,+Jl.+Raya+Legian+No.398,+Legian,+Kuta,+Bali&output=embed',
+    src: '/branches/legian.jpg',
     team: [
       {
         name: 'Herman',
         role: 'Tattoo Artist',
-        bio: 'Known for detailed, largely hand-drawn sleeve work — clients regularly come back to finish the rest of the piece.',
+        bio: 'Known for detailed, largely hand-drawn sleeve work — clients regularly return to have him finish out bigger pieces.',
       },
       {
         name: 'Mike',
         role: 'Tattoo Artist',
-        bio: 'Puts nervous first-timers at ease while delivering clean, precise results.',
+        bio: 'Puts nervous first- and second-timers at ease while delivering clean, simple, right-on-point designs.',
       },
       {
         name: 'Eka',
         role: 'Tattoo Artist',
-        bio: 'Specialises in fine line work — praised for thin, precise linework that heals beautifully.',
+        bio: 'Specialist in true fine line work — thin, precise linework that keeps its detail as it heals.',
       },
     ],
   },
@@ -54,37 +88,15 @@ export const BRANCHES = [
     hours: 'Open daily · 10:00 – 21:00',
     rating: 4.9,
     reviewCount: 73,
-    mapsLink: 'https://www.google.com/maps/search/Swordsman+Tattoo+Studio+Kuta+Jl+Bakung+Sari',
+    mapsLink: 'https://www.google.com/maps/search/Swordsman+Tattoo+Studio+Kuta+Jl+Bakung+Sari+No.39',
     mapsEmbed:
       'https://www.google.com/maps?q=Swordsman+Tattoo+Studio+Kuta,+Jl.+Bakung+Sari+No.39,+Kuta,+Bali&output=embed',
+    src: '/branches/kuta.jpg',
     team: [
       {
         name: 'Hermon',
         role: 'Tattoo Artist',
-        bio: 'Regularly finishes pieces ahead of schedule without compromising on detail.',
-      },
-    ],
-  },
-  {
-    id: 'nar-nar-goon',
-    short: 'Nar Nar Goon, AU',
-    name: 'Swordsman Tattoo Nar Nar Goon',
-    country: 'Victoria, Australia',
-    address: '3 Main St, Nar Nar Goon VIC 3812, Australia',
-    phoneDisplay: '+61 412 775 557',
-    whatsapp: 'https://wa.me/61412775557',
-    hours: 'Closed Mondays & Tuesdays — check Instagram for hours',
-    rating: 4.4,
-    reviewCount: 33,
-    mapsLink: 'https://www.google.com/maps/search/Swordsman+Tattoo+Nar+Nar+Goon',
-    mapsEmbed:
-      'https://www.google.com/maps?q=Swordsman+Tattoo+Nar+Nar+Goon,+3+Main+St,+Nar+Nar+Goon+VIC,+Australia&output=embed',
-    instagram: 'https://www.instagram.com/swordsman_victoria/',
-    team: [
-      {
-        name: 'Aiden',
-        role: 'Tattoo Artist',
-        bio: 'Takes the time to design cover-ups carefully and put nervous clients at ease.',
+        bio: 'Resident artist at the Kuta studio, also home to The Piercing Place.',
       },
     ],
   },
