@@ -5,7 +5,7 @@ const DEFAULT_DESCRIPTION =
   'Swordsman Tattoo Studio Bali — custom tattoos & piercing in Legian, Kuta. Book via WhatsApp.'
 // Same domain used in index.html's OG tags and public/sitemap.xml — update
 // all three together if/when a custom domain is added.
-const SITE_URL = 'https://swordsman-tattoo.vercel.app'
+const SITE_URL = 'https://www.swordsmantattoostudiobali.com'
 
 function setMeta(name, content) {
   let el = document.querySelector(`meta[name="${name}"]`)

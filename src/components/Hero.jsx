@@ -53,7 +53,9 @@ export default function Hero() {
         >
           SWORDSMAN
           <br />
-          <span className="text-blood-bright">TATTOO</span>
+          <span className="text-blood-bright text-[8vw] md:text-[3.8rem] tracking-wide">
+            TATTOO STUDIO BALI
+          </span>
         </motion.h1>
 
         <motion.p
