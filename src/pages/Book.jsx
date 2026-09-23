@@ -3,7 +3,7 @@ import Reveal from '../components/Reveal'
 import FlowPaths from '../components/FlowPaths'
 import { useDocumentHead } from '../hooks/useDocumentHead'
 import { BRANCHES } from '../data/branches'
-import { PLACEMENTS } from '../data/portfolio'
+import { CATEGORIES } from '../data/portfolio'
 import { STUDIO } from '../constants'
 
 // Booking is scoped to the primary (Legian) branch's artists for now — the
@@ -23,7 +23,7 @@ export default function Book() {
     name: '',
     contact: '',
     artist: ARTIST_OPTIONS[0],
-    placement: PLACEMENTS[0],
+    category: CATEGORIES[0],
     date: '',
     message: '',
   })
@@ -37,7 +37,7 @@ export default function Book() {
       `Name: ${form.name}`,
       `Contact: ${form.contact}`,
       `Preferred artist: ${form.artist}`,
-      `Placement: ${form.placement}`,
+      `Type: ${form.category}`,
       form.date ? `Preferred date: ${form.date}` : null,
       form.message ? `Details: ${form.message}` : null,
     ].filter(Boolean)
@@ -110,12 +110,12 @@ export default function Book() {
               </div>
               <div>
                 <label className="block text-xs uppercase tracking-widest text-bone-dim mb-2">
-                  Placement
+                  Type
                 </label>
-                <select value={form.placement} onChange={update('placement')} className={inputClass}>
-                  {PLACEMENTS.map((p) => (
-                    <option key={p} value={p} className="bg-ink">
-                      {p}
+                <select value={form.category} onChange={update('category')} className={inputClass}>
+                  {CATEGORIES.map((c) => (
+                    <option key={c} value={c} className="bg-ink">
+                      {c}
                     </option>
                   ))}
                 </select>

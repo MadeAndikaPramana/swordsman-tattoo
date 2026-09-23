@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { PORTFOLIO as INITIAL_PORTFOLIO, PLACEMENTS } from '../data/portfolio'
+import { PORTFOLIO as INITIAL_PORTFOLIO, CATEGORIES } from '../data/portfolio'
 
 // Resizes/compresses a File client-side before it's base64-encoded and sent
 // to the API — keeps request payloads well under Vercel's body-size limit
@@ -66,7 +66,7 @@ export default function Admin() {
 
   const [items, setItems] = useState(INITIAL_PORTFOLIO)
   const [deleteIds, setDeleteIds] = useState(new Set())
-  const [pendingFiles, setPendingFiles] = useState([]) // { file, placement, previewUrl }
+  const [pendingFiles, setPendingFiles] = useState([]) // { file, category, previewUrl }
   const [saving, setSaving] = useState(false)
   const [status, setStatus] = useState(null) // { type: 'success' | 'error', message }
 
@@ -103,13 +103,13 @@ export default function Admin() {
     const files = Array.from(e.target.files || [])
     setPendingFiles((prev) => [
       ...prev,
-      ...files.map((file) => ({ file, placement: PLACEMENTS[0], previewUrl: URL.createObjectURL(file) })),
+      ...files.map((file) => ({ file, category: CATEGORIES[0], previewUrl: URL.createObjectURL(file) })),
     ])
     e.target.value = ''
   }
 
-  const updatePendingPlacement = (index, placement) => {
-    setPendingFiles((prev) => prev.map((p, i) => (i === index ? { ...p, placement } : p)))
+  const updatePendingCategory = (index, category) => {
+    setPendingFiles((prev) => prev.map((p, i) => (i === index ? { ...p, category } : p)))
   }
 
   const removePending = (index) => {
@@ -129,7 +129,7 @@ export default function Admin() {
       const additions = await Promise.all(
         pendingFiles.map(async (p) => {
           const { base64 } = await resizeImageFile(p.file)
-          return { placement: p.placement, filename: p.file.name, base64 }
+          return { category: p.category, filename: p.file.name, base64 }
         }),
       )
       const deletions = [...deleteIds].map((id) => ({ id }))
@@ -203,13 +203,13 @@ export default function Admin() {
                 marked ? 'border-blood-bright' : 'border-transparent'
               }`}
             >
-              <img src={it.src} alt={it.placement} className="w-full h-full object-cover" />
+              <img src={it.src} alt={it.category} className="w-full h-full object-cover" />
               <div
                 className={`absolute inset-0 flex items-center justify-center text-center text-xs uppercase tracking-widest text-bone px-2 transition-opacity ${
                   marked ? 'opacity-100 bg-blood/70' : 'opacity-0 hover:opacity-100 bg-ink/60'
                 }`}
               >
-                {marked ? 'Marked for deletion' : `Delete · ${it.placement}`}
+                {marked ? 'Marked for deletion' : `Delete · ${it.category}`}
               </div>
             </button>
           )
@@ -228,13 +228,13 @@ export default function Admin() {
             <div key={i}>
               <img src={p.previewUrl} alt="" className="w-full h-40 object-cover" />
               <select
-                value={p.placement}
-                onChange={(e) => updatePendingPlacement(i, e.target.value)}
+                value={p.category}
+                onChange={(e) => updatePendingCategory(i, e.target.value)}
                 className="w-full mt-2 bg-transparent border border-bone/20 text-bone-dim text-xs px-2 py-1.5 focus:outline-none focus:border-blood-bright"
               >
-                {PLACEMENTS.map((pl) => (
-                  <option key={pl} value={pl} className="bg-ink">
-                    {pl}
+                {CATEGORIES.map((c) => (
+                  <option key={c} value={c} className="bg-ink">
+                    {c}
                   </option>
                 ))}
               </select>

@@ -2,7 +2,7 @@ import { motion } from 'motion/react'
 import { Link } from 'react-router-dom'
 import Reveal from './Reveal'
 import PlaceholderImage from './PlaceholderImage'
-import { PORTFOLIO, placementToSlug } from '../data/portfolio'
+import { PORTFOLIO, categoryToSlug } from '../data/portfolio'
 
 // Newest first — ids are assigned sequentially by the admin uploader, so the
 // highest ids are the most recently added photos.
@@ -32,7 +32,7 @@ export default function GalleryTeaser() {
         <div className="grid sm:grid-cols-3 gap-4">
           {teaser.map((it, i) => (
             <Reveal key={it.id} delay={i * 0.08}>
-              <Link to={`/portfolio/${placementToSlug(it.placement)}`} className="block">
+              <Link to={`/portfolio/${categoryToSlug(it.category)}`} className="block">
                 <motion.div
                   whileHover="hover"
                   initial="rest"
@@ -43,10 +43,10 @@ export default function GalleryTeaser() {
                     transition={{ duration: 0.4, ease: 'easeOut' }}
                     className="absolute inset-0"
                   >
-                    <PlaceholderImage label={it.placement} src={it.src} className="absolute inset-0" />
+                    <PlaceholderImage label={it.category} src={it.src} className="absolute inset-0" />
                   </motion.div>
                   <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/10 to-transparent flex items-end p-5 pointer-events-none">
-                    <span className="text-bone text-sm uppercase tracking-widest">{it.placement}</span>
+                    <span className="text-bone text-sm uppercase tracking-widest">{it.category}</span>
                   </div>
                 </motion.div>
               </Link>

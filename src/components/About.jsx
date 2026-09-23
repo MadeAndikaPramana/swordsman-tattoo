@@ -11,7 +11,7 @@ const stats = [
   { value: '1000+', label: 'Tattoos Done' },
 ]
 
-const AUTO_SWIPE_MS = 1000
+const AUTO_SWIPE_MS = 3000
 
 function BranchCarousel() {
   const [index, setIndex] = useState(0)

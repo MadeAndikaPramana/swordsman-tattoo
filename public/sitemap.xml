@@ -13,23 +13,23 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://swordsman-tattoo.vercel.app/portfolio/arm</loc>
+    <loc>https://swordsman-tattoo.vercel.app/portfolio/piercing</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://swordsman-tattoo.vercel.app/portfolio/leg</loc>
+    <loc>https://swordsman-tattoo.vercel.app/portfolio/water-color</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://swordsman-tattoo.vercel.app/portfolio/back</loc>
+    <loc>https://swordsman-tattoo.vercel.app/portfolio/polynesian</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://swordsman-tattoo.vercel.app/portfolio/chest</loc>
+    <loc>https://swordsman-tattoo.vercel.app/portfolio/fineline</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://swordsman-tattoo.vercel.app/portfolio/hand</loc>
+    <loc>https://swordsman-tattoo.vercel.app/portfolio/color</loc>
     <priority>0.6</priority>
   </url>
   <url>
@@ -37,7 +37,15 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://swordsman-tattoo.vercel.app/portfolio/piercing</loc>
+    <loc>https://swordsman-tattoo.vercel.app/portfolio/full-back</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://swordsman-tattoo.vercel.app/portfolio/full-sleeve</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://swordsman-tattoo.vercel.app/portfolio/full-leg</loc>
     <priority>0.6</priority>
   </url>
   <url>

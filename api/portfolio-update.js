@@ -56,8 +56,8 @@ export default async function handler(req, res) {
     return
   }
   for (const item of additions) {
-    if (!item.placement || !item.filename || !item.base64) {
-      res.status(400).json({ error: 'Each new photo needs a placement, filename, and image data.' })
+    if (!item.category || !item.filename || !item.base64) {
+      res.status(400).json({ error: 'Each new photo needs a category, filename, and image data.' })
       return
     }
     const ext = (item.filename.split('.').pop() || '').toLowerCase()
@@ -85,7 +85,7 @@ export default async function handler(req, res) {
       const base = slugifyFilename(item.filename) || 'photo'
       const filename = `${base}-${stamp}-${index}.${ext}`
       additionEntries.push({ path: `public/images/${filename}`, base64: item.base64 })
-      newItems.push({ id: nextId++, placement: item.placement, src: `/images/${filename}` })
+      newItems.push({ id: nextId++, category: item.category, src: `/images/${filename}` })
     })
 
     const finalItems = [...remaining, ...newItems]

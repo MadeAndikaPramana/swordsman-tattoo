@@ -1,15 +1,25 @@
 import portfolioData from './portfolio.json'
 
-// Body-placement categories, not tattoo art styles — chosen deliberately so
-// a non-technical owner can categorize their own uploads at a glance (which
-// body part is obviously easier to identify than which art style). Cover-Up
-// and Piercing stay as their own categories since they're distinct services
-// customers look for specifically, not a body location.
-export const PLACEMENTS = ['Arm', 'Leg', 'Back', 'Chest', 'Hand', 'Cover-Up', 'Piercing']
+// Tattoo type/style categories the owner chooses from when uploading —
+// mix of style (Fineline, Water Color, Polynesian, Color), service
+// (Piercing, Cover Up), and size/placement (Full Back, Full Sleeve, Full
+// Leg) since that's how the studio itself talks about its own work.
+export const CATEGORIES = [
+  'Piercing',
+  'Water Color',
+  'Polynesian',
+  'Fineline',
+  'Color',
+  'Cover Up',
+  'Full Back',
+  'Full Sleeve',
+  'Full Leg',
+]
 
-export const placementToSlug = (placement) => placement.toLowerCase().replace(/\s+/g, '-')
+export const categoryToSlug = (category) => category.toLowerCase().replace(/\s+/g, '-')
 
 // Lives in portfolio.json (not inline here) so the /admin serverless
-// function can read + rewrite it as plain JSON via the GitHub API, without
-// needing to safely parse/regenerate JS source.
+// function (and the bulk-import script) can read + rewrite it as plain
+// JSON via the GitHub API / filesystem, without needing to safely
+// parse/regenerate JS source.
 export const PORTFOLIO = portfolioData.items

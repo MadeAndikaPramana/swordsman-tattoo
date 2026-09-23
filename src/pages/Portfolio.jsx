@@ -4,31 +4,31 @@ import { motion, AnimatePresence } from 'motion/react'
 import Reveal from '../components/Reveal'
 import PlaceholderImage from '../components/PlaceholderImage'
 import { useDocumentHead } from '../hooks/useDocumentHead'
-import { PORTFOLIO, PLACEMENTS, placementToSlug } from '../data/portfolio'
+import { PORTFOLIO, CATEGORIES, categoryToSlug } from '../data/portfolio'
 import { STUDIO } from '../constants'
 
-const FILTERS = ['All', ...PLACEMENTS]
+const FILTERS = ['All', ...CATEGORIES]
 
 export default function Portfolio() {
-  const { placement: placementSlug } = useParams()
-  const placementFromUrl = PLACEMENTS.find((p) => placementToSlug(p) === placementSlug) || 'All'
-  const [active, setActive] = useState(placementFromUrl)
+  const { category: categorySlug } = useParams()
+  const categoryFromUrl = CATEGORIES.find((c) => categoryToSlug(c) === categorySlug) || 'All'
+  const [active, setActive] = useState(categoryFromUrl)
 
-  // keep the filter in sync when arriving via a /portfolio/:placement link
+  // keep the filter in sync when arriving via a /portfolio/:category link
   // (e.g. clicking a Recent Work tile) rather than a fresh page load
   useEffect(() => {
-    setActive(placementFromUrl)
-  }, [placementFromUrl])
+    setActive(categoryFromUrl)
+  }, [categoryFromUrl])
 
   useDocumentHead({
     title: active === 'All' ? 'Portfolio' : `${active} Tattoos — Portfolio`,
     description:
       active === 'All'
-        ? 'Browse the full tattoo portfolio from Swordsman Tattoo Studio Bali — arm, leg, back, chest, hand, cover-ups & piercing.'
+        ? 'Browse the full tattoo portfolio from Swordsman Tattoo Studio Bali — piercing, water color, polynesian, fineline, color, cover-ups, full back, full sleeve & full leg.'
         : `${active} tattoo work from Swordsman Tattoo Studio Bali in Legian, Kuta.`,
   })
 
-  const items = active === 'All' ? PORTFOLIO : PORTFOLIO.filter((p) => p.placement === active)
+  const items = active === 'All' ? PORTFOLIO : PORTFOLIO.filter((p) => p.category === active)
 
   return (
     <section className="pt-36 pb-28 md:pb-36">
@@ -39,7 +39,7 @@ export default function Portfolio() {
             Full Gallery
           </h1>
           <p className="text-bone-dim">
-            Browse work by placement, or follow{' '}
+            Browse work by type, or follow{' '}
             <a
               href={STUDIO.instagram}
               target="_blank"
@@ -89,7 +89,7 @@ export default function Portfolio() {
                     transition={{ duration: 0.4, ease: 'easeOut' }}
                     className="absolute inset-0"
                   >
-                    <PlaceholderImage label={it.placement} src={it.src} className="absolute inset-0" />
+                    <PlaceholderImage label={it.category} src={it.src} className="absolute inset-0" />
                   </motion.div>
                 </motion.div>
               </motion.div>
